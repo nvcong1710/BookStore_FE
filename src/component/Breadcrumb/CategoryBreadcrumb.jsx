@@ -1,8 +1,8 @@
 import Axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation, Link, useParams } from "react-router-dom";
-// import { UserContext } from "../../context/UserContext";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../../src/context/UserContext";
+
 const CategoryBreadcrumb = () => {
   const categoryId = useParams();
   const { user } = useContext(UserContext);
