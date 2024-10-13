@@ -1,16 +1,16 @@
 import LoginPage from "../pages/LoginPage/LoginPage";
 import HomePage from "../pages/HomePage/HomePage";
-import ProductsByCategoryPage from "../pages/ProductsByCategory/ProductsByCategory";
+import BooksByCategoryPage from "../pages/BooksByCategory/BooksByCategory";
 import Register from "../pages/Register";
 import { Breadcrumb, CategoryBreadcrumb } from "../component/Breadcrumb";
 import ProductPage from "../pages/Product";
-import BranchsPage from "../pages/Branchs";
-import DetailBranchPage from "../pages/DetailBranch";
+import AuthorsPage from "../pages/Authors";
+import DetailAuthorPage from "../pages/DetailAuthor";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Order from "../pages/Order";
 import DetailOrder from "../pages/DetailOrder";
-import AllProducts from "../pages/AllProducts/AllProducts";
+import AllBooks from "../pages/AllBooks/AllBooks";
 
 const publicRoutes = [
   {
@@ -29,7 +29,7 @@ const publicRoutes = [
   },
   {
     path: "/tat-ca-sach",
-    component: AllProducts,
+    component: AllBooks,
   },
   {
     path: "/register",
@@ -41,7 +41,7 @@ const publicRoutes = [
   },
   {
     path: "/tac-gia",
-    component: BranchsPage,
+    component: AuthorsPage,
     breadcrumb: Breadcrumb,
     props: {
       heading: "Tác giả",
@@ -77,7 +77,7 @@ const publicRoutes = [
   },
   {
     path: "/:category",
-    component: ProductsByCategoryPage,
+    component: BooksByCategoryPage,
     breadcrumb: CategoryBreadcrumb,
   },
   {
@@ -86,7 +86,7 @@ const publicRoutes = [
   },
   {
     path: "/tac-gia/:authorId",
-    component: DetailBranchPage,
+    component: DetailAuthorPage,
   },
 ];
 
