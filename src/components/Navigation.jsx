@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { FaHome, FaUser, FaSignInAlt, FaSignOutAlt, FaCog, FaInfoCircle, FaChevronDown, FaBars, FaShareSquare } from 'react-icons/fa';
+import { FaUser, FaSignInAlt, FaSignOutAlt, FaCog, FaChevronDown, FaBars } from 'react-icons/fa';
 import AuthContext from './../context/AuthContext';
 
 const Navigation = () => {
@@ -23,7 +23,8 @@ const Navigation = () => {
     return (
         <nav className="navigation">
             <div className="logo">
-                <a href="/">LOGO</a>
+                <img src="./assets/avatar.png" alt="Car Express Logo" className="logo-img" />
+                <span className="logo-text">CAR EXPRESS</span>
             </div>
             <div className="menu-toggle" onClick={toggleMenu}>
                 <FaBars /> {/* Icon hamburger */}
@@ -31,15 +32,20 @@ const Navigation = () => {
             <ul className={`menu ${menuOpen ? 'open' : ''}`}>
                 <li>
                     <a href="/">
-                        <FaHome /> Trang Chủ
+                        Trang Chủ
                     </a>
                 </li>
                 <li>
                     <a href="/introduce">
-                        <FaInfoCircle /> Giới Thiệu
+                        Tìm kiếm
                     </a>
                 </li>
-                <li><a href="/blog"><FaShareSquare /> Blog</a></li>
+                <li>
+                    <a href="/introduce">
+                        Cho thuê xe
+                    </a>
+                </li>
+                <li><a href="/blog">Bài viêt</a></li>
                 {token ? (
                     <>
                         <li className="dropdown">
@@ -65,8 +71,16 @@ const Navigation = () => {
                     </>
                 ) : (
                     <>
-                        <li><a href="/register"><FaUser /> Đăng Kí</a></li>
-                        <li><a href="/login"><FaSignInAlt /> Đăng Nhập</a></li>
+                        <li>
+                            <a href="/register" className="auth-register">
+                                <FaUser /> Đăng Kí
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/login" className="auth-login">
+                                <FaSignInAlt /> Đăng Nhập
+                            </a>
+                        </li>
                     </>
                 )}
             </ul>

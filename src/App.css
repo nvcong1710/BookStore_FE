@@ -25,78 +25,65 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
   padding: 10px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-bottom: 1px solid #ccc;
   position: relative;
-  z-index: 10;
 }
 
-.navigation #logout {
-  background: red;
-  color: white;
+.logo {
+  display: flex;
+  align-items: center;
 }
-.logo a {
-  text-decoration: none;
+
+.logo-img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 18px;
   font-weight: bold;
+  color: #1a237e;
 }
 
 .menu {
-  list-style: none;
   display: flex;
-  align-items: center;
+  list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .menu li {
-  margin-left: 20px;
-  position: relative;
+  margin: 0 15px;
+  height: 45px;
+  align-content: center;
 }
 
-.menu li a,
-.menu li button {
+.menu a {
+  font-size: 16px;
   text-decoration: none;
   display: flex;
   align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 16px 12px;
-  font-size: medium;
 }
 
-.menu li a:hover,
-.menu li button:hover {
-  background-color: #6dd6ff;
-  border-radius: 10px;
+.auth-register,
+.auth-login {
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
-.dropdown-menu {
-  display: block;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 250px;
+.auth-register {
+  border: 1px solid #333;
   background-color: white;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  z-index: 5;
+  color: #333;
 }
 
-.dropdown-menu li {
-  margin: 5px 0;
-}
-
-.dropdown-menu li a {
-  text-decoration: none;
-  padding: 5px;
-  display: block;
-}
-
-.dropdown-menu li a:hover {
-  background-color: #56ccff;
+.auth-login {
+  background-color: #ff6f00;
+  color: white;
+  font-weight: bold;
 }
 
 .menu-toggle {
@@ -106,32 +93,45 @@ ul {
 }
 
 @media (max-width: 768px) {
-  .navigation {
-    flex-direction: column;
-  }
-
-  .menu li {
-    margin: 10px 0;
-  }
   .menu {
-    display: none;
     flex-direction: column;
+    background-color: white;
     position: absolute;
-    top: 50px;
-    left: 0;
+    top: 60px;
+    right: 0;
     width: 100%;
-    background-color: #fff;
-    padding: 10px;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
   }
 
   .menu.open {
-    display: flex;
+    height: auto;
+  }
+
+  .menu li {
+    text-align: center;
+    margin: 10px 0;
   }
 
   .menu-toggle {
     display: block;
   }
 }
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  top: 100%;
+  left: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
 /*= Footer */
 
 .site-footer {
