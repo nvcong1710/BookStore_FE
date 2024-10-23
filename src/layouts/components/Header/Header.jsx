@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import ProductCategory from "../ProductCategory";
+import BookCategory from "../BookCategory";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
@@ -10,7 +10,7 @@ function Header() {
   const { user, logout } = useContext(UserContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [showProductCategory, setShowProductCategory] = useState(false);
+  const [showBookCategory, setShowBookCategory] = useState(false);
   const [showMobileCategory, setShowMobileCategory] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -180,7 +180,7 @@ function Header() {
               </div>
               <Link to="/">
                 <img
-                  src="/product-store1.png"
+                  src="/book-store1.png"
                   alt="Sách mới"
                   className="h-8 w-auto"
                   height="32"
@@ -201,16 +201,16 @@ function Header() {
                   </li>
                   <li
                     className="flex items-center"
-                    onMouseLeave={() => setShowProductCategory(false)} // Handle mouse leaving to hide the category
+                    onMouseLeave={() => setShowBookCategory(false)} // Handle mouse leaving to hide the category
                   >
                     <Link
                       // to="/"
                       onClick={() => { }}
                       className="flex items-center text-sm font-medium text-slate-700 hover:text-slate-800"
-                      onMouseEnter={() => setShowProductCategory(true)} // Use a function to set the state
+                      onMouseEnter={() => setShowBookCategory(true)} // Use a function to set the state
                     >
                       Danh mục
-                      {showProductCategory ? (
+                      {showBookCategory ? (
                         <FontAwesomeIcon
                           icon={faChevronUp}
                           className="h-3 w-3 ml-1"
@@ -222,7 +222,7 @@ function Header() {
                         />
                       )}
                     </Link>
-                    {showProductCategory && <ProductCategory />}
+                    {showBookCategory && <BookCategory />}
                   </li>
                   <li className="flex items-center">
                     <Link
