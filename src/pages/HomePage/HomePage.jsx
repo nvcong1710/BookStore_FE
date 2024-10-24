@@ -1,16 +1,16 @@
-import { ProductSlider, BranchSlider } from "../../component/Slider";
+import { BookSlider, AuthorSlider } from "../../component/Slider";
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../../src/context/UserContext";
 function HomePage() {
-  const [branchs, setBranchs] = useState();
-  const [products, setProducts] = useState();
+  const [authors, setAuthors] = useState();
+  const [books, setBooks] = useState();
   const { user } = useContext(UserContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const branchsResponse = await fetch(
+        const authorsResponse = await fetch(
           `http://localhost:8080/api/tacgia/get10tacgia`, {
           headers: {
             'Content-Type': 'application/json',
@@ -18,17 +18,17 @@ function HomePage() {
           }
         }
         );
-        if (!branchsResponse.ok) {
-          throw new Error("Failed to fetch branchs");
+        if (!authorsResponse.ok) {
+          throw new Error("Failed to fetch authors");
         }
-        const branchsData = await branchsResponse.json();
-        setBranchs(branchsData);
+        const authorsData = await authorsResponse.json();
+        setAuthors(authorsData);
       } catch (error) {
-        console.error("Error fetching branchs:", error);
+        console.error("Error fetching authors:", error);
       }
 
       try {
-        const productsResponse = await axios.get(
+        const booksResponse = await axios.get(
           `http://localhost:8080/api/sach/getallsach`, {
           headers: {
             'Content-Type': 'application/json',
@@ -36,9 +36,9 @@ function HomePage() {
           }
         }
         );
-        setProducts(productsResponse.data);
+        setBooks(booksResponse.data);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching books:", error);
       }
     };
 
@@ -122,20 +122,20 @@ function HomePage() {
       </div>
 
       <div className="bg-white">
-        {products && (
+        {books && (
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-10">
               Sách mới
             </h2>
-            <ProductSlider products={products} />
+            <BookSlider books={books} />
           </div>
         )}
-        {branchs && (
+        {authors && (
           <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:pb-16 lg:px-8">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-10">
               Các tác giả
             </h2>
-            <BranchSlider branchs={branchs} />
+            <AuthorSlider authors={authors} />
           </div>
         )}
       </div>

@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../../src/context/UserContext";
 
 import Axios from 'axios';
 
-const FeedbackList = ({ productId }) => {
+const FeedbackList = ({ bookId }) => {
     const [feedbacks, setFeedbacks] = useState([]);
-    const user = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         const fetchFeedbacks = async () => {
             try {
-                const res = await Axios.get(`http://localhost:8080/api/feedback/layfeedbacktheosach/${productId}`, {
+                const res = await Axios.get(`http://localhost:8080/api/feedback/layfeedbacktheosach/${bookId}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.token}`
@@ -23,7 +23,7 @@ const FeedbackList = ({ productId }) => {
         };
 
         fetchFeedbacks();
-    }, [productId]);
+    }, [bookId]);
 
     return (
         <div className="mx-auto bg-white shadow-md rounded-lg p-4">

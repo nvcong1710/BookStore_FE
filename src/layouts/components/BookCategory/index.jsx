@@ -2,7 +2,7 @@ import Axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../../../src/context/UserContext";
 
-function ProductCategory() {
+function BookCategory() {
   const [categories, setCategories] = useState([]);
   const user = useContext(UserContext);
   useEffect(() => {
@@ -41,4 +41,4 @@ function ProductCategory() {
   );
 }
 
-export default ProductCategory;
+export default BookCategory;
