@@ -1,11 +1,16 @@
 import { BookSlider, AuthorSlider } from "../../component/Slider";
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
+<<<<<<< HEAD
 import { UserContext } from "../../../src/context/UserContext";
+=======
+import { UserContext } from "../../../../website_ban_sach_fe/src/context/UserContext";
+>>>>>>> 98d614632ea169e126800a09c3b684578ca1cffd
 function HomePage() {
   const [authors, setAuthors] = useState();
   const [books, setBooks] = useState();
   const { user } = useContext(UserContext);
+<<<<<<< HEAD
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +49,8 @@ function HomePage() {
 
     fetchData();
   }, []);
+=======
+>>>>>>> 98d614632ea169e126800a09c3b684578ca1cffd
   return (
     <div className="bg-white bg-blue-50">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 flex">
@@ -51,6 +58,7 @@ function HomePage() {
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             <span className="block">Sách mới - Mang trí thức đến mọi nơi</span>
           </h2>
+<<<<<<< HEAD
           <p className="mt-4 text-lg text-gray-800">
             <a href="/" className="text-blue-600">
               Sachmoi.vn
@@ -66,6 +74,9 @@ function HomePage() {
             ngay để khám phá thế giới sách phong phú và thỏa mãn đam mê đọc
             sách.
           </p>
+=======
+          
+>>>>>>> 98d614632ea169e126800a09c3b684578ca1cffd
           <div className="mt-8">
             {/* <button className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Mua sắm ngay
