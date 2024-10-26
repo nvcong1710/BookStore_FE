@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../../src/context/UserContext";
 
 import { useParams } from "react-router-dom";
-// import { getProductsByCategory } from './api';
+// import { getBooksByCategory } from './api';
 import ProductPrice from "../../component/ProductPrice";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -13,9 +13,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const MIN = 10000;
 const MAX = 400000;
 
-const ProductsByCategoryPage = () => {
+const BooksByCategoryPage = () => {
   const { category } = useParams();
-  const [products, setProducts] = useState([]);
+  const [books, setBooks] = useState([]);
   const [price, setPrice] = useState([MIN, MAX]);
   const [tooltipText, setTooltipText] = useState("");
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ const ProductsByCategoryPage = () => {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchProducts = () => {
+    const fetchBooks = () => {
       const apiUrl =
         `http://localhost:8080/api/sach/getbydanhmucphantrang/` +
         category +
@@ -37,12 +37,12 @@ const ProductsByCategoryPage = () => {
           'Authorization': `Bearer ${user.token}`
         }
       }).then((response) => {
-        setProducts(response.data.listSach);
+        setBooks(response.data.listSach);
         setLoading(false);
         setTotalpage(response.data.tongSoTrang);
       });
     };
-    fetchProducts();
+    fetchBooks();
   }, [category]);
 
   const handlePageClick = (event) => {
@@ -59,7 +59,7 @@ const ProductsByCategoryPage = () => {
         'Authorization': `Bearer ${user.token}`
       }
     }).then((response) => {
-      setProducts(response.data.listSach);
+      setBooks(response.data.listSach);
       setLoading(false);
       setTotalpage(response.data.tongSoTrang);
     });
@@ -77,7 +77,7 @@ const ProductsByCategoryPage = () => {
     }
     )
       .then((res) => {
-        setProducts(res.data);
+        setBooks(res.data);
       })
       .catch((error) => {
         console.log("Error fetching data", error);
@@ -121,9 +121,9 @@ const ProductsByCategoryPage = () => {
             ) : (
               <>
                 <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
-                  {products.map((product) => (
+                  {books.map((book) => (
                     <div
-                      key={product.id}
+                      key={book.id}
                       className="hover:-top-4 hover:-left-4 hover:p-8 hover:w-[calc(100%+32px)] hover:z-10 hover:-mb-[33px]  p-4 border border-collapse bg-white hover:shadow-md overflow-hidden relative "
                     >
                       {/* <div className="hover:p-16 hover:absolute hover:-top-8 hover:-left-8 hover:w-[128px]"> */}
@@ -131,18 +131,18 @@ const ProductsByCategoryPage = () => {
 
                       <div className="group">
                         <a
-                          href={`/sach/${product.id}`}
+                          href={`/sach/${book.id}`}
                           className="flex justify-center"
                         >
                           <img
                             src={
-                              product.photoURL
-                                ? product.photoURL.includes("/")
-                                  ? product.photoURL
-                                  : `http://localhost:8080/sach_image/${product.photoURL}`
-                                : "https://productstoreromanceday.org/wp-content/uploads/2020/08/product-cover-placeholder.png"
+                              book.photoURL
+                                ? book.photoURL.includes("/")
+                                  ? book.photoURL
+                                  : `http://localhost:8080/sach_image/${book.photoURL}`
+                                : "https://bookstoreromanceday.org/wp-content/uploads/2020/08/book-cover-placeholder.png"
                             }
-                            alt={product.tieuDe}
+                            alt={book.tieuDe}
                             className="w-auto h-64 object-cover z-20"
                           />
                         </a>
@@ -220,21 +220,21 @@ const ProductsByCategoryPage = () => {
                         </div>
                         <div className="p-2">
                           <a
-                            href={`/sach/${product.id}`}
+                            href={`/sach/${book.id}`}
                             className="flex text-lg font-semibold mb-2"
                           >
-                            <p className="line-clamp-2 z-20">{product.tieuDe}</p>
+                            <p className="line-clamp-2 z-20">{book.tieuDe}</p>
                           </a>
                           <div className="flex items-center">
                             {/* <span className="text-gray-500 line-through mr-2">
-                            {product.discountPrice}đ
+                            {book.discountPrice}đ
                           </span> */}
                             <span className="text-blue-500 font-bold">
-                              <ProductPrice price={product.gia} />
+                              <ProductPrice price={book.gia} />
                             </span>
                           </div>
                           {/* <span className="inline-block bg-blue-500 text-white rounded-full px-3 py-1 text-xs font-semibold">
-                          {product.discount}%
+                          {book.discount}%
                         </span> */}
                         </div>
                       </div>
@@ -276,4 +276,4 @@ const ProductsByCategoryPage = () => {
   );
 };
 
-export default ProductsByCategoryPage;
+export default BooksByCategoryPage;

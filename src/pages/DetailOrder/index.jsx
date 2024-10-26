@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+<<<<<<< HEAD
+import { UserContext } from "../../../src/context/UserContext";
+=======
+import { UserContext } from "../../../../website_ban_sach_fe/src/context/UserContext";
+>>>>>>> 98d614632ea169e126800a09c3b684578ca1cffd
 
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -99,7 +103,7 @@ const DetailOrder = () => {
                         ? item.sach.photoURL.includes("/")
                           ? item.sach.photoURL
                           : `http://localhost:8080/sach_image/${item.sach.photoURL}`
-                        : "https://productstoreromanceday.org/wp-content/uploads/2020/08/product-cover-placeholder.png"
+                        : "https://bookstoreromanceday.org/wp-content/uploads/2020/08/book-cover-placeholder.png"
                     }
                   />
                 </div>

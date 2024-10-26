@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="max-w-2xl w-full flex justify-between items-end">
           <div className="flex flex-col">
             <div className="flex items-end -mx-2 mb-2">
-              <img src="/public/product-store1.png" alt="" className="w-16 transform -scale-x-100" />
+              <img src="/public/book-store1.png" alt="" className="w-16 transform -scale-x-100" />
               <h3 className="font-semibold italic pb-2 text-sky-700">Mỗi cuốn sách là một thế giới</h3>
             </div>
             <a>

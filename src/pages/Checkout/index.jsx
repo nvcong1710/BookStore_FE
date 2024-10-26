@@ -12,9 +12,13 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/cart/getgiohang/${user.id}`)
+      .get(`http://localhost:8080/api/cart/getgiohang/${user.id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        }
+      })
       .then((res) => {
-        console.log(res.data);
         if (res.data.length === 0) {
           alert("Giỏ hàng trống");
           window.location.href = "/";
@@ -23,7 +27,6 @@ const Checkout = () => {
         let total_price = 0;
         for (const product of res.data) {
           total_price += product.sach.gia * product.soLuong;
-          console.log(total_price);
         }
         setTotalPrice(total_price);
       })
@@ -90,15 +93,11 @@ const Checkout = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const selectedCity =
-      cities.find((city) => city.Id === formData.city)?.Name || "";
-    const selectedDistrict =
-      districts.find((district) => district.Id === formData.district)?.Name ||
-      "";
-    const selectedWard =
-      wards.find((ward) => ward.Id === formData.ward)?.Name || "";
+    const selectedCity = cities.find((city) => city.Id === formData.city)?.Name || "";
+    const selectedDistrict = districts.find((district) => district.Id === formData.district)?.Name || "";
+    const selectedWard = wards.find((ward) => ward.Id === formData.ward)?.Name || "";
     const fullAddress = `${formData.address}, ${selectedWard}, ${selectedDistrict}, ${selectedCity}`;
 
     const orderData = {
@@ -107,18 +106,24 @@ const Checkout = () => {
       tenNguoiNhan: formData.name,
       soDienThoai: formData.phone,
     };
-    // console.log(orderData);
-    axios
-      .post("http://localhost:8080/api/donhang/createdonhang", orderData)
-      .then((response) => {
-        console.log("Đặt hàng thành công:", response.data);
-        alert("Đặt hàng thành công");
-        window.location.href = "/";
-      })
-      .catch((error) => {
-        console.error("Có lỗi xảy ra trong quá trình đặt hàng: ", error);
-      });
-  };
+
+    try {
+      axios
+        .post("http://localhost:8080/api/donhang/createdonhang", orderData, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+          }
+        })
+        .then((response) => {
+          console.log("Đặt hàng thành công:", response.data);
+          alert("Đặt hàng thành công");
+          window.location.href = "/";
+        })
+    } catch (error) {
+      console.error("Có lỗi xảy ra trong quá trình đặt hàng: ", error);
+    }
+  }
 
   return (
     <main className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 sm:pt-14 sm:pb-64 lg:max-w-7xl lg:px-8">
@@ -308,32 +313,6 @@ const Checkout = () => {
                   </select>
                 </div>
               </div>
-              <div className="sm:col-span-3">
-                <fieldset className="mt-4">
-                  <div className="space-y-4">
-                    <label className="relative block cursor-pointer rounded-lg border border-gray-300 bg-gray-50/20 px-6 py-4 shadow-sm focus:outline-none sm:flex sm:justify-between">
-                      <span className="flex items-center">
-                        <span className="flex flex-col text-sm">
-                          <div className="flex">
-                            <input
-                              type="radio"
-                              className=" border-2 border-blue-500 checked:bg-indigo-500"
-                              checked="true"
-                            />
-                            <span className="ml-2 font-medium text-slate-900">
-                              {" "}
-                              Thanh toán khi nhận hàng{" "}
-                            </span>
-                          </div>
-                          <span className="text-slate-500">
-                            <span className="block sm:inline"> </span>
-                          </span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-                </fieldset>
-              </div>
 
               <div className="sm:col-span-3">
                 <label
@@ -374,7 +353,7 @@ const Checkout = () => {
                           ? product.sach.photoURL.includes("/")
                             ? product.sach.photoURL
                             : `http://localhost:8080/sach_image/${product.sach.photoURL}`
-                          : "https://productstoreromanceday.org/wp-content/uploads/2020/08/product-cover-placeholder.png"
+                          : "https://bookstoreromanceday.org/wp-content/uploads/2020/08/book-cover-placeholder.png"
                       }
                       alt={product.sach.tieuDe}
                       className="w-20 rounded-md"

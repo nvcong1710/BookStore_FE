@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductPrice from "../../component/ProductPrice";
-import { ProductSlider } from "../../component/Slider";
+import { BookSlider } from "../../component/Slider";
 import Breadcrumb from "../../component/Breadcrumb/Breadcrumb";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
@@ -14,7 +14,7 @@ const ProductPage = () => {
   const [activeTab, setActiveTab] = useState("description");
   const { user } = useContext(UserContext);
   const [quantity, setQuantity] = useState(1);
-  const [randomProducts, setRandomProducts] = useState([[]]);
+  const [randomBooks, setRandomBooks] = useState([[]]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -82,7 +82,7 @@ const ProductPage = () => {
       }
     })
       .then((response) => {
-        setRandomProducts(response.data);
+        setRandomBooks(response.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -104,7 +104,7 @@ const ProductPage = () => {
                   ? product.photoURL.includes("/")
                     ? product.photoURL
                     : `http://localhost:8080/sach_image/${product.photoURL}`
-                  : "https://productstoreromanceday.org/wp-content/uploads/2020/08/product-cover-placeholder.png"
+                  : "https://bookstoreromanceday.org/wp-content/uploads/2020/08/book-cover-placeholder.png"
               }
               alt=""
               className="h-full"
@@ -185,7 +185,7 @@ const ProductPage = () => {
           )}
           {activeTab === "reviews" && (
             <div className="mt-6">
-              <FeedbackList productId={productId} />
+              <FeedbackList bookId={productId} />
               <FeedbackForm user={user} />
             </div>
           )}
@@ -194,7 +194,7 @@ const ProductPage = () => {
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-10">
             Có thể bạn thích
           </h2>
-          <ProductSlider products={randomProducts} />
+          <BookSlider books={randomBooks} />
         </div>
       </div>
     </div>
