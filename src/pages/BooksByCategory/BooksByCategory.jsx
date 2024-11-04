@@ -1,8 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
+<<<<<<< HEAD
 import { UserContext } from "../../../../website_ban_sach_fe/src/context/UserContext";
 
 import { useParams } from "react-router-dom";
 
+=======
+import { UserContext } from "../../../src/context/UserContext";
+
+import { useParams } from "react-router-dom";
+// import { getBooksByCategory } from './api';
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
 import ProductPrice from "../../component/ProductPrice";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -87,6 +94,12 @@ const BooksByCategoryPage = () => {
   return (
     <div className="bg-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<<<<<<< HEAD
+=======
+        {/* <h2 className="text-3xl font-extrabold text-gray-900 mb-6">
+          {category}
+        </h2> */}
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
         <div className="grid  md:grid-cols-3 lg:grid-cols-5 gap-6">
           <div className="col-span-4 md:col-span-2 lg:col-span-1">
             <div className="rounded-lg pb-4 bg-gray-200 bg-opacity-50">
@@ -112,7 +125,11 @@ const BooksByCategoryPage = () => {
             </div>
           </div>
           <div className="col-span-4">
+<<<<<<< HEAD
            
+=======
+            {/* gap-6 */}
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
             {loading ? (
               <p>Loading...</p>
             ) : (
@@ -123,7 +140,12 @@ const BooksByCategoryPage = () => {
                       key={book.id}
                       className="hover:-top-4 hover:-left-4 hover:p-8 hover:w-[calc(100%+32px)] hover:z-10 hover:-mb-[33px]  p-4 border border-collapse bg-white hover:shadow-md overflow-hidden relative "
                     >
+<<<<<<< HEAD
                      
+=======
+                      {/* <div className="hover:p-16 hover:absolute hover:-top-8 hover:-left-8 hover:w-[128px]"> */}
+                      {/* <div className="hover:p-4 hover:-top-4 hover:w-[100%+2rem]"> */}
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
 
                       <div className="group">
                         <a
@@ -222,11 +244,23 @@ const BooksByCategoryPage = () => {
                             <p className="line-clamp-2 z-20">{book.tieuDe}</p>
                           </a>
                           <div className="flex items-center">
+<<<<<<< HEAD
+=======
+                            {/* <span className="text-gray-500 line-through mr-2">
+                            {book.discountPrice}đ
+                          </span> */}
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
                             <span className="text-blue-500 font-bold">
                               <ProductPrice price={book.gia} />
                             </span>
                           </div>
+<<<<<<< HEAD
             
+=======
+                          {/* <span className="inline-block bg-blue-500 text-white rounded-full px-3 py-1 text-xs font-semibold">
+                          {book.discount}%
+                        </span> */}
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
                         </div>
                       </div>
                     </div>

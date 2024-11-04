@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
+<<<<<<< HEAD
 import { SHA256 } from "crypto-js";
 import Web3 from "web3";
+=======
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
 
 const Checkout = () => {
   const { user } = useContext(UserContext);
@@ -11,6 +14,7 @@ const Checkout = () => {
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
+<<<<<<< HEAD
  
   const [blocks, setBlocks] = useState();
   const [web3, setWeb3] = useState(null);
@@ -112,6 +116,8 @@ const Checkout = () => {
     return block;
   }
   
+=======
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
 
   useEffect(() => {
     axios
@@ -122,7 +128,10 @@ const Checkout = () => {
         }
       })
       .then((res) => {
+<<<<<<< HEAD
         console.log(res.data);
+=======
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
         if (res.data.length === 0) {
           alert("Giỏ hàng trống");
           window.location.href = "/";
@@ -131,7 +140,10 @@ const Checkout = () => {
         let total_price = 0;
         for (const product of res.data) {
           total_price += product.sach.gia * product.soLuong;
+<<<<<<< HEAD
           console.log(total_price);
+=======
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
         }
         setTotalPrice(total_price);
       })
@@ -212,6 +224,7 @@ const Checkout = () => {
       soDienThoai: formData.phone,
     };
 
+<<<<<<< HEAD
     
     if (web3 && selectedAccount) {
       const contractAddress = "0x742d35Cc6634C0532925a3b844Bc454e4438f44e";
@@ -251,6 +264,25 @@ const Checkout = () => {
       }
     }
   };
+=======
+    try {
+      axios
+        .post("http://localhost:8080/api/donhang/createdonhang", orderData, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+          }
+        })
+        .then((response) => {
+          console.log("Đặt hàng thành công:", response.data);
+          alert("Đặt hàng thành công");
+          window.location.href = "/";
+        })
+    } catch (error) {
+      console.error("Có lỗi xảy ra trong quá trình đặt hàng: ", error);
+    }
+  }
+>>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
 
   return (
     <main className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 sm:pt-14 sm:pb-64 lg:max-w-7xl lg:px-8">

@@ -1,6 +1,5 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import ChatBot from "./components/ChatBot/ChatBot";
 import { Outlet } from "react-router-dom";
 
 function UserLayout({ children }) {
@@ -10,7 +9,6 @@ function UserLayout({ children }) {
       {/* {children} */}
       <Outlet />
       <Footer />
-      <ChatBot />
     </div>
   );
 }

@@ -52,13 +52,13 @@ const settings2 = {
     },
   ],
 };
-const AuthorSlider = ({authors}) => {
+const AuthorSlider = ({ authors }) => {
   return (
     <Slider {...settings2}>
       {authors.map((author) => (
         <div key={author.id} className="flex flex-col items-center px-4">
           <div className="flex flex-col items-center">
-             <a href={`/tac-gia/${author.id}`}>
+            <a href={`/tac-gia/${author.id}`}>
               <img
                 // inline-block
                 className="flex items-center h-48 w-48 rounded-full ring-2 ring-white object-cover"
@@ -82,7 +82,7 @@ const AuthorSlider = ({authors}) => {
   );
 };
 
-const BookSlider = ({books}) => {
+const BookSlider = ({ books }) => {
   return (
     <Slider {...settings}>
       {books.map((book) => (
