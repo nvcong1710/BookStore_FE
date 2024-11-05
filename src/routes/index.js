@@ -5,7 +5,7 @@ import Register from "../pages/Register";
 import { Breadcrumb, CategoryBreadcrumb } from "../component/Breadcrumb";
 import ProductPage from "../pages/Product";
 import BranchsPage from "../pages/Branchs";
-import DetailAuthorPage from "../pages/DetailAuthor";
+import DetailBranchPage from "../pages/DetailBranch";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Order from "../pages/Order";
@@ -86,7 +86,7 @@ const publicRoutes = [
   },
   {
     path: "/tac-gia/:authorId",
-    component: DetailAuthorPage,
+    component: DetailBranchPage,
   },
 ];
 

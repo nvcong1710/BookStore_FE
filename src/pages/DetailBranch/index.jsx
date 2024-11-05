@@ -15,7 +15,7 @@ const DetailBranchPage = () => {
     const fetchBranchs = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/tacgia/getTacGia/${authorId}`, {
+          `http://localhost:8080/api/tacgia/getTacGia/${branchId}`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${user.token}`
@@ -23,13 +23,13 @@ const DetailBranchPage = () => {
         }
         );
         if (!response.ok) {
-          throw new Error("Failed to fetch authors");
+          throw new Error("Failed to fetch branchs");
         }
         const data = await response.json();
         setBranch(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching authors:", error);
+        console.error("Error fetching branchs:", error);
       }
     };
 
@@ -38,7 +38,7 @@ const DetailBranchPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/sach/getsachbytacgia/${authorId}`, {
+      .get(`http://localhost:8080/api/sach/getsachbytacgia/${branchId}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${user.token}`
@@ -57,25 +57,25 @@ const DetailBranchPage = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div key={author.id} className="flex flex-col items-center px-4">
+        <div key={branch.id} className="flex flex-col items-center px-4">
           <div className="flex gap-8 lg:flex-row flex-col items-center">
             <div className="">
               <img
                 // inline-block
                 className="flex items-center h-64 w-64 lg:h-80 lg:w-80 rounded-full ring-2 ring-white object-cover"
                 src={
-                  author.image
-                    ? author.image.includes("/")
-                      ? author.image
-                      : `http://localhost:8080/tg_image/${author.image}`
+                  branch.image
+                    ? branch.image.includes("/")
+                      ? branch.image
+                      : `http://localhost:8080/tg_image/${branch.image}`
                     : "https://bizweb.dktcdn.net/100/363/455/articles/blank-author-33728236-0ca7-4f4e-a265-ddcd14036f53.jpg?v=1705287921247"
                 }
-                alt={author.tenTacGia}
+                alt={branch.tenTacGia}
               />
             </div>
             <div className="flex-1">
               <h2 className="pb-4 mt-2 text-2xl font-medium text-gray-900">
-                {author.tenTacGia}
+                {branch.tenTacGia}
               </h2>
               <p className="text-xl">
                 Là một trong những nhà báo nổi tiếng, ông đã viết ra rất nhiều
@@ -102,4 +102,4 @@ const DetailBranchPage = () => {
   );
 };
 
-export default DetailAuthorPage;
+export default DetailBranchPage;

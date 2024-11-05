@@ -52,27 +52,27 @@ const settings2 = {
     },
   ],
 };
-const AuthorSlider = ({ authors }) => {
+const BranchSlider = ({ branchs }) => {
   return (
     <Slider {...settings2}>
-      {authors.map((author) => (
-        <div key={author.id} className="flex flex-col items-center px-4">
+      {branchs.map((branch) => (
+        <div key={branch.id} className="flex flex-col items-center px-4">
           <div className="flex flex-col items-center">
-            <a href={`/tac-gia/${author.id}`}>
+            <a href={`/tac-gia/${branch.id}`}>
               <img
                 // inline-block
                 className="flex items-center h-48 w-48 rounded-full ring-2 ring-white object-cover"
                 src={
-                  author.image
-                    ? author.image.includes("/")
-                      ? author.image
-                      : `http://localhost:8080/tg_image/${author.image}`
-                    : "https://bizweb.dktcdn.net/100/363/455/articles/blank-author-33728236-0ca7-4f4e-a265-ddcd14036f53.jpg?v=1705287921247"
+                  branch.image
+                    ? branch.image.includes("/")
+                      ? branch.image
+                      : `http://localhost:8080/tg_image/${branch.image}`
+                    : "https://bizweb.dktcdn.net/100/363/455/articles/blank-branch-33728236-0ca7-4f4e-a265-ddcd14036f53.jpg?v=1705287921247"
                 }
-                alt={author.tenTacGia}
+                alt={branch.tenTacGia}
               />
               <h3 className="mt-2 text-base font-medium text-gray-900">
-                {author.tenTacGia}
+                {branch.tenTacGia}
               </h3>
             </a>
           </div>
@@ -119,4 +119,4 @@ const ProductSlider = ({ products }) => {
   );
 };
 
-export { AuthorSlider, ProductSlider };
+export { BranchSlider as BranchSlider, ProductSlider };

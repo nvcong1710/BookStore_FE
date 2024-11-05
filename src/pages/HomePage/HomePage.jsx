@@ -1,16 +1,16 @@
-import { ProductSlider, AuthorSlider } from "../../component/Slider";
+import { ProductSlider, BranchSlider } from "../../component/Slider";
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 function HomePage() {
-  const [authors, setBranchs] = useState();
+  const [branchs, setBranchs] = useState();
   const [products, setProducts] = useState();
   const { user } = useContext(UserContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const authorsResponse = await fetch(
+        const branchsResponse = await fetch(
           `http://localhost:8080/api/tacgia/get10tacgia`, {
           headers: {
             'Content-Type': 'application/json',
@@ -18,13 +18,13 @@ function HomePage() {
           }
         }
         );
-        if (!authorsResponse.ok) {
-          throw new Error("Failed to fetch authors");
+        if (!branchsResponse.ok) {
+          throw new Error("Failed to fetch branchs");
         }
-        const authorsData = await authorsResponse.json();
-        setBranchs(authorsData);
+        const branchsData = await branchsResponse.json();
+        setBranchs(branchsData);
       } catch (error) {
-        console.error("Error fetching authors:", error);
+        console.error("Error fetching branchs:", error);
       }
 
       try {
@@ -130,12 +130,12 @@ function HomePage() {
             <ProductSlider products={products} />
           </div>
         )}
-        {authors && (
+        {branchs && (
           <div className="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:pb-16 lg:px-8">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-10">
               Các tác giả
             </h2>
-            <AuthorSlider authors={authors} />
+            <BranchSlider branchs={branchs} />
           </div>
         )}
       </div>
