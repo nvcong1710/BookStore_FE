@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FaHome, FaUser, FaSignInAlt, FaSignOutAlt, FaCog, FaInfoCircle, FaChevronDown, FaBars, FaShareSquare } from 'react-icons/fa';
-import AuthContext from './../context/AuthContext';
+import AuthContext from '../context/AuthContext';
 
 const Navigation = () => {
     const { token, user, logout } = useContext(AuthContext);
