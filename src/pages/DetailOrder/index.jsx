@@ -99,7 +99,7 @@ const DetailOrder = () => {
                         ? item.sach.photoURL.includes("/")
                           ? item.sach.photoURL
                           : `http://localhost:8080/sach_image/${item.sach.photoURL}`
-                        : "https://productstoreromanceday.org/wp-content/uploads/2020/08/product-cover-placeholder.png"
+                        : "https://bookstoreromanceday.org/wp-content/uploads/2020/08/book-cover-placeholder.png"
                     }
                   />
                 </div>

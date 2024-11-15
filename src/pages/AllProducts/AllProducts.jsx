@@ -8,6 +8,7 @@ import { UserContext } from "../../context/UserContext";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
+
   const [tooltipText, setTooltipText] = useState("");
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -55,7 +56,6 @@ const AllProducts = () => {
       }
     }
   };
-
   return (
     <div className="bg-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,29 +79,29 @@ const AllProducts = () => {
           <div className="col-span-4">
             {loading ? (
               <p>Loading...</p>
-            ) : products.length === 0 ? (
-              <p>No products found.</p>
+            ) : books.length === 0 ? (
+              <p>No books found.</p>
             ) : (
               <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
-                {products.map((product) => (
+                {books.map((book) => (
                   <div
-                    key={product.id}
+                    key={book.id}
                     className="hover:-top-4 hover:-left-4 hover:p-8 hover:w-[calc(100%+32px)] hover:z-10 hover:-mb-[33px]  p-4 border border-collapse bg-white hover:shadow-md overflow-hidden relative"
                   >
                     <div className="group">
                       <a
-                        href={`/sach/${product.id}`}
+                        href={`/sach/${book.id}`}
                         className="flex justify-center"
                       >
                         <img
                           src={
-                            product.photoURL
-                              ? product.photoURL.includes("/")
-                                ? product.photoURL
-                                : `http://localhost:8080/sach_image/${product.photoURL}`
-                              : "https://productstoreromanceday.org/wp-content/uploads/2020/08/product-cover-placeholder.png"
+                            book.photoURL
+                              ? book.photoURL.includes("/")
+                                ? book.photoURL
+                                : `http://localhost:8080/sach_image/${book.photoURL}`
+                              : "https://bookstoreromanceday.org/wp-content/uploads/2020/08/book-cover-placeholder.png"
                           }
-                          alt={product.tieuDe}
+                          alt={book.tieuDe}
                           className="w-auto h-64 object-cover z-20"
                         />
                       </a>
@@ -179,14 +179,14 @@ const AllProducts = () => {
                       </div>
                       <div className="p-2">
                         <a
-                          href={`/sach/${product.id}`}
+                          href={`/sach/${book.id}`}
                           className="flex text-lg font-semibold mb-2"
                         >
-                          <p className="line-clamp-2 z-20">{product.tieuDe}</p>
+                          <p className="line-clamp-2 z-20">{book.tieuDe}</p>
                         </a>
                         <div className="flex items-center">
                           <span className="text-blue-500 font-bold">
-                            <ProductPrice price={product.gia} />
+                            <ProductPrice price={book.gia} />
                           </span>
                         </div>
                       </div>

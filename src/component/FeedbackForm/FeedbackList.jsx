@@ -10,7 +10,7 @@ const FeedbackList = ({ productId }) => {
     useEffect(() => {
         const fetchFeedbacks = async () => {
             try {
-                const res = await Axios.get(`http://localhost:8080/api/feedback/layfeedbacktheosach/${productId}`, {
+                const res = await Axios.get(`http://localhost:8080/api/feedback/layfeedbacktheosach/${bookId}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.token}`
@@ -23,7 +23,7 @@ const FeedbackList = ({ productId }) => {
         };
 
         fetchFeedbacks();
-    }, [productId]);
+    }, [bookId]);
 
     return (
         <div className="mx-auto bg-white shadow-md rounded-lg p-4">
