@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../../src/context/UserContext";
 
 
 
-const BranchsPage = () => {
-  const [branchs, setBranchs] = useState([]);
+const AuthorsPage = () => {
+  const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchBranchs = async () => {
+    const fetchAuthors = async () => {
       try {
         const response = await fetch(
           "http://localhost:8080/api/tacgia/getalltacgia", {
@@ -20,17 +20,17 @@ const BranchsPage = () => {
         }
         );
         if (!response.ok) {
-          throw new Error("Failed to fetch branchs");
+          throw new Error("Failed to fetch authors");
         }
         const data = await response.json();
-        setBranchs(data);
+        setAuthors(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching branchs:", error);
+        console.error("Error fetching authors:", error);
       }
     };
 
-    fetchBranchs();
+    fetchAuthors();
   }, []);
 
   return (
@@ -40,26 +40,26 @@ const BranchsPage = () => {
         <p>Loading...</p>
       ) : (
         <ul className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
-          {/* {randomBranchs.map((author) => ( */}
-          {branchs.map((branch) => (
-            <div key={branch.id} className="flex flex-col items-center px-4">
+          {/* {randomAuthors.map((author) => ( */}
+          {authors.map((author) => (
+            <div key={author.id} className="flex flex-col items-center px-4">
               <div className="flex flex-col items-center">
-                <a href={`/tac-gia/${branch.id}`}>
+                <a href={`/tac-gia/${author.id}`}>
                   <img
                     className="flex items-center h-48 w-48 rounded-full ring-2 ring-white object-cover"
                     src={
-                      branch.image
-                        ? branch.image.includes("/")
-                          ? branch.image
-                          : `http://localhost:8080/tg_image/${branch.image}`
+                      author.image
+                        ? author.image.includes("/")
+                          ? author.image
+                          : `http://localhost:8080/tg_image/${author.image}`
                         : "https://bizweb.dktcdn.net/100/363/455/articles/blank-author-33728236-0ca7-4f4e-a265-ddcd14036f53.jpg?v=1705287921247"
                     }
-                    alt={branch.tenTacGia}
+                    alt={author.tenTacGia}
                   />
                 </a>
-                <a href={`/tac-gia/${branch.id}`}>
+                <a href={`/tac-gia/${author.id}`}>
                   <h3 className="mt-2 text-base font-medium text-lg text-gray-900">
-                    {branch.tenTacGia}
+                    {author.tenTacGia}
                   </h3>
                 </a>
               </div>
@@ -71,4 +71,4 @@ const BranchsPage = () => {
   );
 };
 
-export default BranchsPage;
+export default AuthorsPage;
