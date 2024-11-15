@@ -4,18 +4,17 @@ import ProductPrice from "../../component/ProductPrice";
 import "rc-slider/assets/index.css";
 import Axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../../src/context/UserContext";
 
-const AllProducts = () => {
-  const [products, setProducts] = useState([]);
-
+const AllBooks = () => {
+  const [books, setBooks] = useState([]);
   const [tooltipText, setTooltipText] = useState("");
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchBooks = async () => {
       const apiUrl = "http://localhost:8080/api/sach/getallsach";
       try {
         const response = await Axios.get(apiUrl, {
@@ -24,16 +23,16 @@ const AllProducts = () => {
             'Authorization': `Bearer ${user.token}`
           }
         });
-        setProducts(response.data || []);
+        setBooks(response.data || []);
       } catch (error) {
-        console.error("Error fetching products:", error);
-        setProducts([]);
+        console.error("Error fetching books:", error);
+        setBooks([]);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
+    fetchBooks();
   }, []);
 
   const handleSearch = async () => {
@@ -47,15 +46,16 @@ const AllProducts = () => {
             'Authorization': `Bearer ${user.token}`
           }
         });
-        setProducts(response.data || []);
+        setBooks(response.data || []);
       } catch (error) {
-        console.error("Error searching products:", error);
-        setProducts([]);
+        console.error("Error searching books:", error);
+        setBooks([]);
       } finally {
         setLoading(false);
       }
     }
   };
+
   return (
     <div className="bg-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -202,4 +202,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default AllBooks;

@@ -1,11 +1,5 @@
 import React from "react";
-const UserContext = React.createContext({
-  id: "",
-  userName: "",
-  auth: false,
-  token: "",
-  type: "",
-});
+const UserContext = React.createContext({ id: "", userName: "", auth: false, token: "", type: "" });
 
 // @function  UserProvider
 // Create function to provide UserContext
@@ -25,17 +19,14 @@ const UserProvider = ({ children }) => {
       type: user.type,
       auth: true,
     });
-    sessionStorage.setItem(
-      "user",
-      JSON.stringify({
-        id: user.id,
-        userName: user.username,
-        email: user.email,
-        token: user.token,
-        type: user.type,
-        auth: true,
-      })
-    );
+    sessionStorage.setItem("user", JSON.stringify({
+      id: user.id,
+      userName: user.username,
+      email: user.email,
+      token: user.token,
+      type: user.type,
+      auth: true
+    }));
   };
 
   const logout = () => {

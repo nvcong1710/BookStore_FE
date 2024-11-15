@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../../../website_ban_sach_fe/src/context/UserContext";
+import { UserContext } from "../../context/UserContext";
 
 import Axios from 'axios';
 
-const FeedbackList = ({ bookId }) => {
+const FeedbackList = ({ productId }) => {
     const [feedbacks, setFeedbacks] = useState([]);
+    const user = useContext(UserContext);
 
     useEffect(() => {
         const fetchFeedbacks = async () => {

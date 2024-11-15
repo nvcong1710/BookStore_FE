@@ -1,11 +1,49 @@
-import { BookSlider, AuthorSlider } from "../../component/Slider";
+import { ProductSlider, BranchSlider } from "../../component/Slider";
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../../../website_ban_sach_fe/src/context/UserContext";
+import { UserContext } from "../../context/UserContext";
 function HomePage() {
-  const [authors, setAuthors] = useState();
-  const [books, setBooks] = useState();
+  const [branchs, setBranchs] = useState();
+  const [products, setProducts] = useState();
   const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const branchsResponse = await fetch(
+          `http://localhost:8080/api/tacgia/get10tacgia`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+          }
+        }
+        );
+        if (!branchsResponse.ok) {
+          throw new Error("Failed to fetch branchs");
+        }
+        const branchsData = await branchsResponse.json();
+        setBranchs(branchsData);
+      } catch (error) {
+        console.error("Error fetching branchs:", error);
+      }
+
+      try {
+        const productsResponse = await axios.get(
+          `http://localhost:8080/api/sach/getallsach`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+          }
+        }
+        );
+        setProducts(productsResponse.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div className="bg-white bg-blue-50">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 flex">
@@ -13,7 +51,21 @@ function HomePage() {
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             <span className="block">Sách mới - Mang trí thức đến mọi nơi</span>
           </h2>
-          
+          <p className="mt-4 text-lg text-gray-800">
+            <a href="/" className="text-blue-600">
+              Sachmoi.vn
+            </a>{" "}
+            là nhà sách trực tuyến đáng tin cậy, cung cấp hàng ngàn sách đa dạng
+            về mọi lĩnh vực. Giao diện thân thiện, dễ sử dụng. Tìm kiếm và đặt
+            hàng thuận tiện. Dịch vụ chuyên nghiệp, đóng gói cẩn thận, vận
+            chuyển nhanh chóng. Chất lượng sách đa ngôn ngữ, xuất bản phẩm đa
+            dạng. Tham gia{" "}
+            <a href="/" className="text-blue-600">
+              Sachmoi.vn
+            </a>{" "}
+            ngay để khám phá thế giới sách phong phú và thỏa mãn đam mê đọc
+            sách.
+          </p>
           <div className="mt-8">
             {/* <button className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Mua sắm ngay
