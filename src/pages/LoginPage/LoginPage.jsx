@@ -20,13 +20,17 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (username && password) {
-      console.log("Login with: ", username, password);
       try {
         const response = await axios.post(
           "http://localhost:8080/auth/login",
           {
             username: username,
             password: password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
         );
 
