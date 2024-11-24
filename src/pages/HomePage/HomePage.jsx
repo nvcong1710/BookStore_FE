@@ -1,10 +1,49 @@
 import { BookSlider, AuthorSlider } from "../../component/Slider";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../../src/context/UserContext";
+import Axios from "axios";
 function HomePage() {
   const [authors, setAuthors] = useState();
   const [books, setBooks] = useState();
   const { user } = useContext(UserContext);
+
+  const fetchBooks = async () => {
+    var apiUrl = "http://localhost:8080/api/sach/getallsach";
+    try {
+      const response = await Axios.get(apiUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      setBooks(response.data || []);
+    } catch (error) {
+      console.error("Error fetching books:", error);
+      setBooks([]);
+    }
+  };
+
+  const fetchAuthors = async () => {
+    var apiUrl = "http://localhost:8080/api/tacgia/get10tacgia";
+    try {
+      const response = await Axios.get(apiUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      setAuthors(response.data || []);
+    } catch (error) {
+      setAuthors([]);
+    }
+  };
+
+  useEffect(() => {
+
+
+    fetchBooks();
+    fetchAuthors();
+  }, []);
 
   return (
     <div className="bg-white">

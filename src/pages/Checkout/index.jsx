@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
-<<<<<<< HEAD
-import { SHA256 } from "crypto-js";
-import Web3 from "web3";
-=======
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
 
 const Checkout = () => {
   const { user } = useContext(UserContext);
@@ -14,110 +9,6 @@ const Checkout = () => {
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
-<<<<<<< HEAD
- 
-  const [blocks, setBlocks] = useState();
-  const [web3, setWeb3] = useState(null);
-  const [accounts, setAccounts] = useState([]);
-  const [selectedAccount, setSelectedAccount] = useState(null);
-  const destinationAccount = "0xf5533a8679F4bd96C9480F3F4AAb3F2c9B0d7aA5";
-
-  const connectGanache = async () => {
-    const ganacheUrl = "http://localhost:7545";
-    const web3 = new Web3(ganacheUrl);
-    const accounts = await web3.eth.getAccounts();
-    console.log(accounts);
-    setAccounts(accounts);
-  };
-
-  useEffect(() => {
-    connectGanache();
-  }, []);
-
-  useEffect(() => {
-    const initWeb3 = async () => {
-      if (window.ethereum) {
-        const web3 = new Web3(window.ethereum);
-        try {
-          await window.ethereum.enable();
-          setWeb3(web3);
-        } catch (err) {
-          console.error(err);
-        }
-      } else if (window.web3) {
-        const web3 = new Web3(window.web3.currentProvider);
-        setWeb3(web3);
-      } else {
-        console.error("No web3 detected");
-      }
-    };
-    initWeb3();
-  }, []);
-
-  useEffect(() => {
-    const getAccounts = async () => {
-      if (web3) {
-        const accounts = await web3.eth.getAccounts();
-        setAccounts(accounts);
-        setSelectedAccount(accounts[0]);
-      }
-    };
-    getAccounts();
-  }, [web3]);
-
-  const handleAccountChange = (e) => {
-    setSelectedAccount(e.target.value);
-  };
-
-  const calculateHash = (block) => {
-    const {
-      id,
-      token,
-      source,
-      destination,
-      previousHash,
-      blockSize,
-      version,
-      merkleRoot,
-      data,
-    } = block;
-    return SHA256(
-      id +
-      token +
-      source +
-      destination +
-      previousHash +
-      blockSize +
-      version +
-      merkleRoot +
-      JSON.stringify(data)
-    ).toString();
-  };
-
-  function createBlock(token) {
-    const previousHash =
-      "0000000000000000000000000000000000000000000000000000000000000000"; // Thay đổi nếu cần thiết
-
-    const block = {
-      id: Date.now(),
-      token,
-      source: selectedAccount,
-      destination: destinationAccount,
-      previousHash,
-      blockSize: Math.floor(Math.random() * 1000) + 1,
-      version: "1.0." + Math.floor(Math.random() * 10),
-      merkleRoot: Math.random().toString(16).substring(2, 66),
-      //   data: blockData,
-      data: "transaction",
-    };
-
-    block.hash = calculateHash(block);
-
-    return block;
-  }
-  
-=======
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
 
   useEffect(() => {
     axios
@@ -128,10 +19,6 @@ const Checkout = () => {
         }
       })
       .then((res) => {
-<<<<<<< HEAD
-        console.log(res.data);
-=======
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
         if (res.data.length === 0) {
           alert("Giỏ hàng trống");
           window.location.href = "/";
@@ -140,10 +27,6 @@ const Checkout = () => {
         let total_price = 0;
         for (const product of res.data) {
           total_price += product.sach.gia * product.soLuong;
-<<<<<<< HEAD
-          console.log(total_price);
-=======
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
         }
         setTotalPrice(total_price);
       })
@@ -224,47 +107,6 @@ const Checkout = () => {
       soDienThoai: formData.phone,
     };
 
-<<<<<<< HEAD
-    
-    if (web3 && selectedAccount) {
-      const contractAddress = "0x742d35Cc6634C0532925a3b844Bc454e4438f44e";
-      const contractABI = [];
-      const contract = new web3.eth.Contract(contractABI, contractAddress);
-      const newBlock = createBlock(totalPrice / 96645076);
-      setBlocks(newBlock);
-
-      try {
-        const tx = {
-          from: selectedAccount,
-          to: destinationAccount,
-          value: web3.utils.toWei(blocks.token.toString(), "ether"),
-          gas: 200000,
-          gasPrice: await web3.eth.getGasPrice(),
-        };
-        const result = await web3.eth.sendTransaction(tx);
-        console.log(result);
-        try {
-          axios
-            .post("http://localhost:8080/api/donhang/createdonhang", orderData, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}`
-              }
-            })
-            .then((response) => {
-              console.log("Đặt hàng thành công:", response.data);
-              alert("Đặt hàng thành công");
-              window.location.href = "/";
-            })
-        } catch (error) {
-          console.error("Có lỗi xảy ra trong quá trình đặt hàng: ", error);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  };
-=======
     try {
       axios
         .post("http://localhost:8080/api/donhang/createdonhang", orderData, {
@@ -282,7 +124,6 @@ const Checkout = () => {
       console.error("Có lỗi xảy ra trong quá trình đặt hàng: ", error);
     }
   }
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
 
   return (
     <main className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 sm:pt-14 sm:pb-64 lg:max-w-7xl lg:px-8">

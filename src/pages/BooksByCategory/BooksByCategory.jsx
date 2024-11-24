@@ -1,15 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
-<<<<<<< HEAD
-import { UserContext } from "../../../../website_ban_sach_fe/src/context/UserContext";
-
-import { useParams } from "react-router-dom";
-
-=======
 import { UserContext } from "../../../src/context/UserContext";
 
 import { useParams } from "react-router-dom";
 // import { getBooksByCategory } from './api';
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
 import ProductPrice from "../../component/ProductPrice";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -92,24 +85,18 @@ const BooksByCategoryPage = () => {
   };
 
   return (
-    <div className="bg-white py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<<<<<<< HEAD
-=======
-        {/* <h2 className="text-3xl font-extrabold text-gray-900 mb-6">
-          {category}
-        </h2> */}
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
-        <div className="grid  md:grid-cols-3 lg:grid-cols-5 gap-6">
+    <div className="bg-white py-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {/* Bộ lọc sản phẩm */}
           <div className="col-span-4 md:col-span-2 lg:col-span-1">
-            <div className="rounded-lg pb-4 bg-gray-200 bg-opacity-50">
-              <h3 className="text-lg text-gray-500 font-semibold mb-4 p-4 border-b">
+            <div className="rounded-lg pb-2 bg-gray-200 bg-opacity-50">
+              <h3 className="text-md text-gray-500 font-semibold mb-2 p-3 border-b">
                 Lọc sản phẩm
               </h3>
-
-              <h3 className="text-lg font-semibold mb-4 pl-4">Giá</h3>
-              <div className="px-4">
-                <div className="text-slate-900 text-md font-medium mb-2">
+              <h3 className="text-md font-semibold mb-2 pl-3">Giá</h3>
+              <div className="px-3">
+                <div className="text-slate-900 text-sm font-medium mb-2">
                   <ProductPrice price={price[0]} /> -{" "}
                   <ProductPrice price={price[1]} />
                 </div>
@@ -120,155 +107,63 @@ const BooksByCategoryPage = () => {
                   value={price}
                   onChange={setPrice}
                 />
-                <button onClick={locSanPham}>Lọc</button>
+                <button
+                  onClick={locSanPham}
+                  className="mt-3 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                >
+                  Lọc
+                </button>
               </div>
             </div>
           </div>
+
+          {/* Danh sách sách */}
           <div className="col-span-4">
-<<<<<<< HEAD
-           
-=======
-            {/* gap-6 */}
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
             {loading ? (
               <p>Loading...</p>
+            ) : books.length === 0 ? (
+              <p>No books found.</p>
             ) : (
               <>
-                <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+                <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2">
                   {books.map((book) => (
                     <div
                       key={book.id}
-                      className="hover:-top-4 hover:-left-4 hover:p-8 hover:w-[calc(100%+32px)] hover:z-10 hover:-mb-[33px]  p-4 border border-collapse bg-white hover:shadow-md overflow-hidden relative "
+                      className="p-2 border bg-white shadow-sm transition-transform transform hover:scale-105 hover:shadow-md"
                     >
-<<<<<<< HEAD
-                     
-=======
-                      {/* <div className="hover:p-16 hover:absolute hover:-top-8 hover:-left-8 hover:w-[128px]"> */}
-                      {/* <div className="hover:p-4 hover:-top-4 hover:w-[100%+2rem]"> */}
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
+                      {/* Ảnh sách */}
+                      <a href={`/sach/${book.id}`} className="block mb-2">
+                        <img
+                          src={
+                            book.photoURL
+                              ? book.photoURL.includes("/")
+                                ? book.photoURL
+                                : `http://localhost:8080/sach_image/${book.photoURL}`
+                              : "https://bookstoreromanceday.org/wp-content/uploads/2020/08/book-cover-placeholder.png"
+                          }
+                          alt={book.tieuDe}
+                          className="w-full h-48 object-cover rounded"
+                        />
+                      </a>
 
-                      <div className="group">
+                      {/* Thông tin sách */}
+                      <div>
                         <a
                           href={`/sach/${book.id}`}
-                          className="flex justify-center"
+                          className="block text-sm font-semibold mb-1 line-clamp-2"
                         >
-                          <img
-                            src={
-                              book.photoURL
-                                ? book.photoURL.includes("/")
-                                  ? book.photoURL
-                                  : `http://localhost:8080/sach_image/${book.photoURL}`
-                                : "https://bookstoreromanceday.org/wp-content/uploads/2020/08/book-cover-placeholder.png"
-                            }
-                            alt={book.tieuDe}
-                            className="w-auto h-64 object-cover z-20"
-                          />
+                          {book.tieuDe}
                         </a>
-                        <div className="absolute inset-0 items-center justify-center transition-opacity hidden group-hover:block duration-300 ">
-                          <div className="absolute inset-0 flex flex-col items-end justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="flex flex-col pt-5">
-                              <div
-                                className="bg-white bg-opacity-50 rounded-full p-2 cursor-pointer"
-                                title="Xem nhanh"
-                                onMouseEnter={() => setTooltipText("Xem nhanh")}
-                                onMouseLeave={() => setTooltipText("")}
-                              >
-                                <svg
-                                  className="w-6 h-6 text-slate-800 hover:text-blue-600"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                  <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                                {tooltipText === "Xem nhanh" && (
-                                  <div className="absolute right-4 translate-y-1 bg-gray-700 text-white px-2 py-1 rounded-md text-sm z-20">
-                                    Xem nhanh
-                                  </div>
-                                )}
-                              </div>
-                              <div
-                                className="bg-white bg-opacity-50 rounded-full p-2 cursor-pointer"
-                                title="Add to wishlist"
-                                onMouseEnter={() =>
-                                  setTooltipText("Add to wishlist")
-                                }
-                                onMouseLeave={() => setTooltipText("")}
-                              >
-                                <svg
-                                  className="w-6 h-6 text-slate-800 hover:text-blue-600 hover:fill-current"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path d="M20.84 4.61a5.96 5.96 0 0 0-8.49 0L12 5.76l-.35-.15a5.96 5.96 0 0 0-8.49 8.49l8.49 8.49 8.49-8.49a5.96 5.96 0 0 0 0-8.49z"></path>
-                                </svg>
-                                {tooltipText === "Add to wishlist" && (
-                                  <div className="absolute right-4 translate-y-1 bg-gray-700 text-white px-2 py-1 rounded-md text-sm z-20">
-                                    Add to wishlist
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                            <div className="relative bg-white bg-opacity-50 rounded-full p-4 pb-8 cursor-pointer">
-                              <svg
-                                className="h-6 w-6 text-slate-800 hover:text-blue-600"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="2"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                                ></path>
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="p-2">
-                          <a
-                            href={`/sach/${book.id}`}
-                            className="flex text-lg font-semibold mb-2"
-                          >
-                            <p className="line-clamp-2 z-20">{book.tieuDe}</p>
-                          </a>
-                          <div className="flex items-center">
-<<<<<<< HEAD
-=======
-                            {/* <span className="text-gray-500 line-through mr-2">
-                            {book.discountPrice}đ
-                          </span> */}
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
-                            <span className="text-blue-500 font-bold">
-                              <ProductPrice price={book.gia} />
-                            </span>
-                          </div>
-<<<<<<< HEAD
-            
-=======
-                          {/* <span className="inline-block bg-blue-500 text-white rounded-full px-3 py-1 text-xs font-semibold">
-                          {book.discount}%
-                        </span> */}
->>>>>>> 3ab11257dbd0a5df5b1f10bd27bc4ba22e322b1d
-                        </div>
+                        <span className="text-blue-500 font-bold text-sm">
+                          <ProductPrice price={book.gia} />
+                        </span>
                       </div>
                     </div>
                   ))}
                 </div>
 
-
-                <div className="flex justify-center mt-8">
+                {/* Phân trang */}
+                <div className="flex justify-center mt-6">
                   {totalpage > 1 && (
                     <ReactPaginate
                       nextLabel=">"
@@ -277,18 +172,12 @@ const BooksByCategoryPage = () => {
                       marginPagesDisplayed={2}
                       pageCount={totalpage}
                       previousLabel="<"
-                      pageClassName="page-item"
-                      pageLinkClassName="page-link"
-                      previousClassName="page-item"
-                      previousLinkClassName="page-link"
-                      nextClassName="page-item"
-                      nextLinkClassName="page-link"
-                      breakLabel="..."
-                      breakClassName="page-item"
-                      breakLinkClassName="page-link"
-                      containerClassName="pagination"
-                      activeClassName="active"
-                      renderOnZeroPageCount={null}
+                      containerClassName="pagination flex space-x-2"
+                      pageLinkClassName="px-2 py-1 border rounded hover:bg-gray-100"
+                      activeClassName="text-blue-500 font-bold"
+                      previousLinkClassName="px-2 py-1 border rounded hover:bg-gray-100"
+                      nextLinkClassName="px-2 py-1 border rounded hover:bg-gray-100"
+                      breakLinkClassName="px-2 py-1"
                     />
                   )}
                 </div>
@@ -298,6 +187,7 @@ const BooksByCategoryPage = () => {
         </div>
       </div>
     </div>
+
   );
 };
 
