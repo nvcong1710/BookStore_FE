@@ -3,7 +3,6 @@ import BookCategory from "../BookCategory";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
-// import Breadcrumb from "../../../component/Breadcrumb";
 import { UserContext } from "../../../context/UserContext";
 import { Link } from "react-router-dom";
 function Header() {
@@ -100,7 +99,7 @@ function Header() {
                       {categories.map((category, index) => (
                         <li key={index}>
                           <Link
-                            to={category.id}
+                            to={`/${category.id}`}
                             className="block p-3 hover:bg-slate-100 rounded-md"
                           >
                             {category.tenDanhMuc}
@@ -129,7 +128,7 @@ function Header() {
               </div>
             </div>
 
-            <div className="space-y-6 border-t border-slate-200 py-6 px-4">
+            {/* <div className="space-y-6 border-t border-slate-200 py-6 px-4">
               <div className="flow-root">
                 <Link
                   to="/login"
@@ -146,6 +145,75 @@ function Header() {
                   Tạo tài khoản
                 </Link>
               </div>
+            </div> */}
+
+            <div className="space-y-6 border-t py-6 px-4">
+              {!user.auth ? (
+                <>
+                  <div className="flow-root">
+                    <Link
+                      to="/login"
+                      className="-m-2 block p-2 font-medium text-slate-900 hover:bg-slate-100 rounded-md"
+                    >
+                      Đăng nhập
+                    </Link>
+                  </div>
+
+                  {/* Tạo tài khoản */}
+                  <div className="flow-root">
+                    <Link
+                      to="/register"
+                      className="-m-2 block p-2 font-medium text-slate-900 hover:bg-slate-100 rounded-md"
+                    >
+                      Tạo tài khoản
+                    </Link>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Thông tin người dùng */}
+                  <div className="flow-root">
+                    <button
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      className="w-full flex justify-between items-center p-2 font-medium text-slate-900 hover:bg-slate-100 rounded-md"
+                    >
+                      <span>{user.userName}</span>
+                      <svg
+                        className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : "rotate-0"
+                          }`}
+                        viewBox="0 0 12 8"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M0.410765 0.910734C0.736202 0.585297 1.26384 0.585297 1.58928 0.910734L6.00002 5.32148L10.4108 0.910734C10.7362 0.585297 11.2638 0.585297 11.5893 0.910734C11.9147 1.23617 11.9147 1.76381 11.5893 2.08924L6.58928 7.08924C6.26384 7.41468 5.7362 7.41468 5.41077 7.08924L0.410765 2.08924C0.0853277 1.76381 0.0853277 1.23617 0.410765 0.910734Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </button>
+
+                    {/* Dropdown cho mobile */}
+                    {dropdownOpen && (
+                      <div className="mt-2 space-y-2 rounded-md border border-slate-200 bg-white shadow-md">
+                        <Link
+                          to="/don-hang"
+                          className="block px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+                        >
+                          Xem đơn hàng
+                        </Link>
+                        <button
+                          onClick={logout}
+                          className="block w-full text-left px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+                        >
+                          Đăng xuất
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -319,38 +387,13 @@ function Header() {
                     </>
                   )}
                 </div>
-                <div className="flex lg:ml-6">
-                  <button
-                    type="button"
-                    className="p-2 text-slate-400 hover:text-slate-500"
-                    onClick={() => {
-                      // Handle search open
-                    }}
-                  >
-                    <svg
-                      className="h-6 w-6"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                      />
-                    </svg>
-                  </button>
-                </div>
                 <div className="ml-4 flow-root lg:ml-6">
                   <Link
                     to="/gio-hang"
                     className="group -m-2 flex items-center p-2"
                   >
                     <svg
-                      className="h-6 w-6 flex-shrink-0 text-slate-400 group-hover:text-slate-500"
+                      className="h-6 w-6 flex-shrink-0 text-slate-400"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
