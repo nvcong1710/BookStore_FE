@@ -25,7 +25,6 @@ const AllBooks = () => {
         });
         setBooks(response.data || []);
       } catch (error) {
-        console.error("Error fetching books:", error);
         setBooks([]);
       } finally {
         setLoading(false);

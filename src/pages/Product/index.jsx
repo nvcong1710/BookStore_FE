@@ -26,6 +26,12 @@ const ProductPage = () => {
       window.location.href = "/login";
       return;
     }
+
+    if (product.soLuong < quantity) {
+      alert("Số lượng sách không đủ");
+      return;
+    }
+
     const res = await axios.post("http://localhost:8080/api/cart/addtocart", {
       taiKhoanId: user.id,
       sachId: productId,
@@ -56,7 +62,6 @@ const ProductPage = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           setProduct(data);
         } else {
           throw new Error("Failed to fetch product");
