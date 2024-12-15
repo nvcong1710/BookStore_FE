@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -60,7 +60,6 @@ const AuthorSlider = ({ authors }) => {
           <div className="flex flex-col items-center">
             <a href={`/tac-gia/${author.id}`}>
               <img
-                // inline-block
                 className="flex items-center h-48 w-48 rounded-full ring-2 ring-white object-cover"
                 src={
                   author.image
@@ -90,8 +89,7 @@ const BookSlider = ({ books }) => {
           key={book.id}
           className="bg-white rounded-lg shadow-md overflow-hidden"
         >
-          {" "}
-          <div className="p-6">
+          <div className="p-4 sm:p-6 w-full">
             <a href={"/sach/" + book.id} className="">
               <img
                 className="h-80 w-full object-cover"
@@ -105,14 +103,18 @@ const BookSlider = ({ books }) => {
                 }
               />
             </a>
-            <a
-              href={"/sach/" + book.id}
-              className="mt-4 text-lg font-medium text-gray-900"
-            >
-              {book.tieuDe}
-            </a>
+            <div className="h-16">
+              <a
+                href={"/sach/" + book.id}
+                className="mt-4 text-lg font-medium text-gray-900"
+              >
+                {book.tieuDe}
+              </a>
+            </div>
             <p className="mt-2 text-md text-blue-500 font-bold">{book.gia}</p>
           </div>
+          {/* ============= */}
+
         </div>
       ))}
     </Slider>
